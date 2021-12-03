@@ -13,26 +13,31 @@ function drawGrid() {
   }
 }
 
+//Character
 class Character {
   constructor(col, row) {
     this.col = col;
     this.row = row;
   }
 
+  clearCanvas() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
   moveUp() {
-    this.row -= 1;
+    this.row -= 50;
   }
 
   moveRight() {
-    this.col += 1;
+    this.col += 50;
   }
 
   moveDown() {
-    this.row += 1;
+    this.row += 50;
   }
 
   moveLeft() {
-    this.col -= 1;
+    this.col -= 50;
   }
 }
 
@@ -45,6 +50,7 @@ function drawPlayer(col, row) {
   };
 }
 
+//Treasure
 class Treasure {
   constructor(col, row) {
     this.col = col;
@@ -66,35 +72,46 @@ class Treasure {
   }
 }
 
+//Create treasure & player1
 let treasure = new Treasure();
 
-window.addEventListener("keydown", (event) => {
-  // Stop the default behavior (moving the screen to the left/up/right/down)
-  event.preventDefault();
+let player1 = new Character(0, 0);
 
-  // React based on the key pressed
-  switch (event.keyCode) {
-    case 37:
-      console.log("left");
-      break;
-    case 38:
-      console.log("up");
-      break;
-    case 39:
-      console.log("right");
-      break;
-    case 40:
-      console.log("down");
-      break;
-  }
-});
-
+//Draw all canvas
 function drawEverything() {
   drawGrid();
 
   drawPlayer(0, 0);
+
   treasure.setRandomPosition();
+
   treasure.drawTreasure();
 }
 
 drawEverything();
+
+//Create interaction
+window.addEventListener("keydown", (e) => {
+  // Stop the default behavior (moving the screen to the left/up/right/down)
+  e.preventDefault();
+
+  // React based on the key pressed
+  switch (e.keyCode) {
+    case 37:
+      player1.moveLeft();
+
+      break;
+    case 38:
+      player1.moveUp();
+
+      break;
+    case 39:
+      player1.moveRight();
+
+      break;
+    case 40:
+      player1.moveDown();
+      break;
+  }
+  drawEverything();
+});
