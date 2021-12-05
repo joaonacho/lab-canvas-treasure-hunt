@@ -45,9 +45,7 @@ function drawPlayer(col, row) {
   const playerImg = new Image(50, 50);
   playerImg.src = "./images/character-down.png";
 
-  playerImg.onload = () => {
-    context.drawImage(playerImg, col, row, 50, 50);
-  };
+  context.drawImage(playerImg, col, row, 50, 50);
 }
 
 //Treasure
@@ -60,10 +58,7 @@ class Treasure {
 
   drawTreasure() {
     this.treasureImg.src = "./images/treasure.png";
-
-    this.treasureImg.onload = () => {
-      context.drawImage(this.treasureImg, this.col, this.row, 50, 50);
-    };
+    context.drawImage(this.treasureImg, this.col, this.row, 50, 50);
   }
 
   setRandomPosition() {
